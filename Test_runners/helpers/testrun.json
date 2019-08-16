@@ -1,0 +1,17 @@
+{
+	"results": [
+		{
+			"case_id": 1,
+			"status_id": 5,
+			"comment": "This test failed",
+			"defects": "TR-7"
+		},
+		{
+			"case_id": 2,
+			"status_id": 1,
+			"comment": "This test passed",
+			"elapsed": "5m",
+			"version": "1.0 RC1"
+		}
+	]
+}

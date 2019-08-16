@@ -1,0 +1,189 @@
+[
+    {
+        "case_0": [
+            {
+                "command": "cd",
+                "parametrs": "",
+                "case_id": 1
+            }
+        ],
+        "case_1": [
+            {
+                "command": "ls",
+                "parametrs": "",
+                "case_id": 1
+            }
+        ],
+        "case_2": [
+            {
+                "command": "pwd",
+                "parametrs": "",
+                "case_id": 1
+            }
+        ]
+        "case_3": [
+            {
+                "command": "agentinfo",
+                "parametrs": "",
+                "case_id": 1
+            }
+        ],
+        "case_4": [
+            {
+                "command": "sysinfo",
+                "parametrs": "",
+                "case_id": 1
+            }
+        ],
+        "case_5": [
+            {
+                "command": "ld",
+                "parametrs": "",
+                "case_id": 1
+            }
+        ],
+        "case_6": [
+            {
+                "command": "useagent",
+                "parametrs": "",
+                "case_id": 1
+            }
+        ],
+        "case_7": [
+            {
+                "command": "cd",
+                "parametrs": "test0",
+                "case_id": 1
+            }
+        ],
+        "case_8": [
+            {
+                "command": "ls",
+                "parametrs": "",
+                "case_id": 1
+            }
+        ],
+        "case_9": [
+            {
+                "command": "ls",
+                "parametrs": "c:",
+                "case_id": 1
+            }
+        ],
+        "case_10": [
+            {
+                "command": "ls",
+                "parametrs": "c:\\Windows",
+                "case_id": 1
+            }
+        ],
+        "case_11": [
+            {
+                "command": "date",
+                "parametrs": "",
+                "case_id": 1
+            }
+        ],
+        "case_12": [
+            {
+                "command": "time",
+                "parametrs": "",
+                "case_id": 1
+            }
+        ],
+        "case_13": [
+            {
+                "command": "tasklist",
+                "parametrs": "",
+                "search": "rundll32",
+                "case_id": 1
+            }
+        ],
+        "case_14": [
+            {
+                "command": "listen",
+                "parametrs": "polo",
+                "case_id": 1
+            }
+        ],
+        "case_15": [
+            {
+                "command": "listpipes",
+                "parametrs": "",
+                "search": "polo",
+                "case_id": 1
+            }
+        ],
+        "case_16": [
+            {
+                "command": "unlisten",
+                "parametrs": "polo",
+                "case_id": 1
+            }
+        ],
+        "case_17": [
+            {
+                "command": "lddlln",
+                "parametrs": "TestDll.dll",
+                "case_id": 1
+            }
+        ],
+        "case_18": [
+            {
+                "command": "listld",
+                "parametrs": "",
+                "case_id": 1
+            }
+        ],
+        "case_19": [
+            {
+                "command": "listexp",
+                "parametrs": "testdll.dll",
+                "search": "TestMessageBox"
+                "case_id": 1
+            }
+        ],
+        "case_20": [
+            {
+                "command": "md5",
+                "parametrs": "loop.txt",
+                "case_id": 1
+            }
+        ],
+        "case_21": [
+            {
+                "command": "mkdir",
+                "parametrs": "Autotest01",
+                "case_id": 1
+            }
+        ],
+        "case_22": [
+            {
+                "command": "rmdir",
+                "parametrs": "Autotest01",
+                "case_id": 1
+            }
+        ],
+        "case_23": [
+            {
+                "command": "useragent",
+                "parametrs": "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)",
+                "case_id": 1
+            }
+        ],
+        "case_24": [
+            {
+                "command": "useagent",
+                "parametrs": "-r",
+                "case_id": 1
+            }
+        ],
+        "case_25": [
+            {
+                "command": "ls",
+                "parametrs": "",
+                "case_id": 1
+            }
+        ]
+    }
+]

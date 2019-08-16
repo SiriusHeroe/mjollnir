@@ -1,0 +1,571 @@
+stages:
+    - configuration_standalone
+    - run_standalone_test
+    - configuration_infrastucture
+    - run_infrastucture_test
+    - configuration_infrastucture_without_ssl
+    - run_infrastucture_test_without_ssl
+    - configuration_infrastucture_without_rdp
+    - run_infrastucture_test_without_rdp
+    - run_test_active_directory
+
+conf_standalone:win7:
+    stage: configuration_standalone
+    tags:
+        - server
+        - standalone
+        - win7
+    variables:
+        GIT_STRATEGY: none
+    script:
+       # Enable RDP (SSL)
+       - Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server' -Name 'fDenyTSConnections' -Value 0
+       # Disable only NLA
+       - Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 0
+       # Stop website
+       - Stop-Website -Name "Default Web Site"
+    only:
+        - web
+
+conf_standalone:win10:
+    stage: configuration_standalone
+    tags:
+        - server
+        - standalone
+        - win10
+    variables:
+        GIT_STRATEGY: none
+    script:
+       # Enable RDP (SSL)
+       - Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server' -Name 'fDenyTSConnections' -Value 0
+       # Disable only NLA
+       - Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 0
+       # Stop website
+       - Stop-Website -Name "Default Web Site"
+    only:
+        - web
+
+conf_standalone:win2012:
+    stage: configuration_standalone
+    tags:
+        - server
+        - standalone
+        - win2012
+    variables:
+        GIT_STRATEGY: none
+    script:
+       # Enable RDP (SSL)
+       - Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server' -Name 'fDenyTSConnections' -Value 0
+       # Disable only NLA
+       - Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 0
+       # Stop website
+       - Stop-Website -Name "Default Web Site"
+    only:
+        - web
+
+conf_standalone:win2016:
+    stage: configuration_standalone
+    tags:
+        - server
+        - standalone
+        - win2016
+    variables:
+        GIT_STRATEGY: none
+    script:
+      # Enable RDP (SSL)
+       - Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server' -Name 'fDenyTSConnections' -Value 0
+       # Disable only NLA
+       - Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 0
+       # Stop website
+       - Stop-Website -Name "Default Web Site"
+    only:
+        - web
+
+conf_standalone:win2019:
+    stage: configuration_standalone
+    tags:
+        - server
+        - standalone
+        - win2019
+    variables:
+        GIT_STRATEGY: none
+    script:
+       # Enable RDP (SSL)
+       - Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server' -Name 'fDenyTSConnections' -Value 0
+       # Disable only NLA
+       - Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 0
+       # Stop website
+       - Stop-Website -Name "Default Web Site"
+    only:
+        - web
+
+test_standalone:win10:
+    stage: run_standalone_test
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t standalone -c 1 -ip 10.100.10.223 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+test_standalone:win2012:
+    stage: run_standalone_test
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t standalone -c 1 -ip 10.100.10.222 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+test_standalone:win2016:
+    stage: run_standalone_test
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t standalone -c 1 -ip 10.100.10.221 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+test_standalone:win2019:
+    stage: run_standalone_test
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t standalone -c 1 -ip 10.100.10.220 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+test_standalone:win7:
+    stage: run_standalone_test
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t standalone -c 1 -ip 10.100.10.219 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+conf_infrastructure:win7:
+    stage: configuration_infrastucture
+    tags:
+        - server
+        - standalone
+        - win7
+    variables:
+        GIT_STRATEGY: none
+    script:
+        # Enable website
+        - Start-Website -Name "Default Web Site"
+    only:
+        - web
+
+conf_infrastructure:win10:
+    stage: configuration_infrastucture
+    tags:
+        - server
+        - standalone
+        - win10
+    variables:
+        GIT_STRATEGY: none
+    script:
+        # Enable website
+        - Start-Website -Name "Default Web Site"
+    only:
+        - web
+
+conf_infrastructure:win2012:
+    stage: configuration_infrastucture
+    tags:
+        - server
+        - standalone
+        - win2012
+    variables:
+        GIT_STRATEGY: none
+    script:
+        # Enable website
+        - Start-Website -Name "Default Web Site"
+    only:
+        - web
+
+conf_infrastructure:win2016:
+    stage: configuration_infrastucture
+    tags:
+        - server
+        - standalone
+        - win2016
+    variables:
+        GIT_STRATEGY: none
+    script:
+        # Enable website
+        - Start-Website -Name "Default Web Site"
+    only:
+        - web
+
+conf_infrastructure:win2019:
+    stage: configuration_infrastucture
+    tags:
+        - server
+        - standalone
+        - win2019
+    variables:
+        GIT_STRATEGY: none
+    script:
+        # Enable website
+        - Start-Website -Name "Default Web Site"
+    only:
+        - web
+
+test_infrastructure:win10:
+    stage: run_infrastucture_test
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t standalone -c 2 -ip 10.100.10.223 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+test_infrastructure:win2012:
+    stage: run_infrastucture_test
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t standalone -c 2 -ip 10.100.10.222 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+test_infrastructure:win2016:
+    stage: run_infrastucture_test
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t standalone -c 2 -ip 10.100.10.221 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+test_infrastructure:win2019:
+    stage: run_infrastucture_test
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t standalone -c 2 -ip 10.100.10.220 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+test_infrastructure:win7:
+    stage: run_infrastucture_test
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t standalone -c 2 -ip 10.100.10.219 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+conf_infrastucture_without_ssl:win7:
+    stage: configuration_infrastucture_without_ssl
+    tags:
+        - server
+        - standalone
+        - win7
+    variables:
+        GIT_STRATEGY: none
+    script:
+        # Enable only NLA
+        - Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+        # Stop website
+        - Stop-Website -Name "Default Web Site"
+    only:
+        - web
+
+conf_infrastucture_without_ssl:win10:
+    stage: configuration_infrastucture_without_ssl
+    tags:
+        - server
+        - standalone
+        - win10
+    variables:
+        GIT_STRATEGY: none
+    script:
+        # Enable only NLA
+        - Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+        # Stop website
+        - Stop-Website -Name "Default Web Site"
+    only:
+        - web
+
+conf_infrastucture_without_ssl:win2012:standalone:
+    stage: configuration_infrastucture_without_ssl
+    tags:
+        - server
+        - standalone
+        - win2012
+    variables:
+        GIT_STRATEGY: none
+    script:
+        # Enable only NLA
+        - Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+        # Stop website
+        - Stop-Website -Name "Default Web Site"
+    only:
+        - web
+
+conf_infrastucture_without_ssl:win2016:standalone:
+    stage: configuration_infrastucture_without_ssl
+    tags:
+        - server
+        - standalone
+        - win2016
+    variables:
+        GIT_STRATEGY: none
+    script:
+        # Enable only NLA
+        - Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+        # Stop website
+        - Stop-Website -Name "Default Web Site"
+    only:
+        - web
+
+conf_infrastucture_without_ssl:win2019:standalone:
+    stage: configuration_infrastucture_without_ssl
+    tags:
+        - server
+        - standalone
+        - win2019
+    variables:
+        GIT_STRATEGY: none
+    script:
+        # Enable only NLA
+        - Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+        # Stop website
+        - Stop-Website -Name "Default Web Site"
+    only:
+        - web
+
+test_infrastucture_without_ssl:standalone:win10:
+    stage: run_infrastucture_test_without_ssl
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t standalone -c 3 -ip 10.100.10.223 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+test_infrastucture_without_ssl:standalone:win2012:
+    stage: run_infrastucture_test_without_ssl
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t standalone -c 3 -ip 10.100.10.222 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+test_infrastucture_without_ssl:standalone:win2016:
+    stage: run_infrastucture_test_without_ssl
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t standalone -c 3 -ip 10.100.10.221 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+test_infrastucture_without_ssl:standalone:win2019:
+    stage: run_infrastucture_test_without_ssl
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t standalone -c 3 -ip 10.100.10.220 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+test_infrastucture_without_ssl:standalone:win7:
+    stage: run_infrastucture_test_without_ssl
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t standalone -c 3 -ip 10.100.10.219 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+conf_infrastucture_without_rdp:win7:standalone:
+    stage: configuration_infrastucture_without_rdp
+    tags:
+        - server
+        - standalone
+        - win7
+    variables:
+        GIT_STRATEGY: none
+    script:
+        # Disable RDP
+        - Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server' -Name 'fDenyTSConnections' -Value 1
+
+    only:
+        - web
+
+conf_infrastucture_without_rdp:win10:standalone:
+    stage: configuration_infrastucture_without_rdp
+    tags:
+        - server
+        - standalone
+        - win10
+    variables:
+        GIT_STRATEGY: none
+    script:
+        # Disable RDP
+        - Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server' -Name 'fDenyTSConnections' -Value 1
+    only:
+        - web
+
+conf_infrastucture_without_rdp:win2012:standalone:
+    stage: configuration_infrastucture_without_rdp
+    tags:
+        - server
+        - standalone
+        - win2012
+    variables:
+        GIT_STRATEGY: none
+    script:
+        # Disable RDP
+        - Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server' -Name 'fDenyTSConnections' -Value 1
+    only:
+        - web
+
+conf_infrastucture_without_rdp:win2016:standalone:
+    stage: configuration_infrastucture_without_rdp
+    tags:
+        - server
+        - standalone
+        - win2016
+    variables:
+        GIT_STRATEGY: none
+    script:
+       # Disable RDP
+        - Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server' -Name 'fDenyTSConnections' -Value 1
+    only:
+        - web
+
+conf_infrastucture_without_rdp:win2019:standalone:
+    stage: configuration_infrastucture_without_rdp
+    tags:
+        - server
+        - standalone
+        - win2019
+    variables:
+        GIT_STRATEGY: none
+    script:
+        # Disable RDP
+        - Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server' -Name 'fDenyTSConnections' -Value 1
+    only:
+        - web
+
+test_conf_infrastucture_without_rdp:standalone:win10:
+    stage: run_infrastucture_test_without_rdp
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t standalone -c 4 -ip 10.100.10.223 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+test_conf_infrastucture_without_rdp:standalone:win2012:
+    stage: run_infrastucture_test_without_rdp
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t standalone -c 4 -ip 10.100.10.222 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+test_conf_infrastucture_without_rdp:standalone:win2016:
+    stage: run_infrastucture_test_without_rdp
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t standalone -c 4 -ip 10.100.10.221 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+test_conf_infrastucture_without_rdp:standalone:win2019:
+    stage: run_infrastucture_test_without_rdp
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t standalone -c 4 -ip 10.100.10.220 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+test_conf_infrastucture_without_rdp:standalone:win7:
+    stage: run_infrastucture_test_without_rdp
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t standalone -c 4 -ip 10.100.10.219 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+test_active_directory:win10:
+    stage: run_test_active_directory
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t ad -c 1 -ip 10.100.10.218 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+test_active_directory:win2012:
+    stage: run_test_active_directory
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t ad -c 1 -ip 10.100.10.217 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+test_active_directory:win2016:
+    stage: run_test_active_directory
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t ad -c 1 -ip 10.100.10.216 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+test_active_directory:win2019:
+    stage: run_test_active_directory
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t ad -c 1 -ip 10.100.10.215 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
+
+test_active_directory:win7:
+    stage: run_test_active_directory
+    tags:
+        - client
+    script:
+        - python .\test\test_rdscan\runner.py -t ad -c 1 -ip 10.100.10.214 -p "C:\credits"
+    only:
+        - web
+    allow_failure: true
